@@ -1,8 +1,8 @@
-const express = require("express");
-const { createCollection } = require("../controllers/collection");
-const { isAuthenticated } = require("../middlewares/auth");
+import express from "express";
+import { createCollection } from "../controllers/collection.js";
+import { isAuthenticated } from "../middlewares/auth.js";
 const router = express.Router();
 
 router.route("/create").post(isAuthenticated, createCollection)
 
-module.exports = router
+export default router

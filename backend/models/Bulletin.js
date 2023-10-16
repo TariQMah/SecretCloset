@@ -1,12 +1,12 @@
 
 import mongoose from "mongoose"
 
-const spottedSchema = new mongoose.Schema({
+const bulletinSchema = new mongoose.Schema({
     cover: {
         type: String,
         required: [true, "Please enter cover"]
     },
-    eventName: {
+    featureTitle: {
         type: String,
 
     },
@@ -17,20 +17,9 @@ const spottedSchema = new mongoose.Schema({
     date: {
         type: String,
     },
-    category: {
-        ref: "SpottedCategory",
-        type: mongoose.Schema.Types.ObjectId,
-    },
-
-    order: Number,
-
     summary: String,
-
+    content: String,
     isActive: {
-        type: Boolean,
-        default: false,
-    },
-    isHome: {
         type: Boolean,
         default: false,
     },
@@ -42,4 +31,4 @@ const spottedSchema = new mongoose.Schema({
 
 
 
-export const Spotted = mongoose.model("Spotted", spottedSchema)
+export const Bulletin = mongoose.model("Bulletin", bulletinSchema)

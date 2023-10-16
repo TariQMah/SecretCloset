@@ -1,6 +1,6 @@
-const Designer = require("../models/Designer")
+import { Designer } from "../models/Designer.js"
 
-exports.createDesigner = async (req, res) => {
+export const createDesigner = async (req, res) => {
 
     try {
         const { logo, profileImage, title, description, phone, email, address, facebook, instagram, website } = req.body
@@ -43,7 +43,7 @@ exports.createDesigner = async (req, res) => {
 
 }
 
-exports.updateDesigner = async (req, res) => {
+export const updateDesigner = async (req, res) => {
     try {
         const designerId = req.query.id;
         const { logo, profileImage, title, description, phone, email, address, facebook, instagram, website } = req.body;

@@ -1,5 +1,4 @@
-
-const mongoose = require("mongoose")
+import mongoose from "mongoose"
 
 const spottedCategorySchema = new mongoose.Schema({
     title: {
@@ -14,4 +13,4 @@ const spottedCategorySchema = new mongoose.Schema({
 
 
 
-module.exports = mongoose.model("SpottedCategory", spottedCategorySchema)
+export const SpottedCategory = mongoose.model("SpottedCategory", spottedCategorySchema)

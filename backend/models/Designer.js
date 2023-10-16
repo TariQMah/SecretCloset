@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+import mongoose from "mongoose"
 
 const designerSchema = new mongoose.Schema({
     logo: {
@@ -33,4 +33,5 @@ const designerSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("Designer", designerSchema)
+
+export const Designer = mongoose.model("Designer", designerSchema);

@@ -1,6 +1,6 @@
-const Collection = require("../models/Collection")
+import { Collection } from "../models/Collection.js"
 
-exports.createCollection = async (req, res) => {
+export const createCollection = async (req, res) => {
 
     try {
         const { title, photos, order, isActive, isLatest, designer } = req.body

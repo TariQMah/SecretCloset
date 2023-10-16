@@ -1,11 +1,11 @@
-const User = require("../models/User")
+import { User } from "../models/User.js"
 
 
 const options = {
     expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
     httpOnly: true
 }
-exports.register = async (req, res) => {
+export const register = async (req, res) => {
 
     try {
         const { name, email, password } = req.body
@@ -45,7 +45,7 @@ exports.register = async (req, res) => {
 }
 
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
 
     try {
         const { email, password } = req.body
