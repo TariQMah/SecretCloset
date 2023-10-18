@@ -1,0 +1,23 @@
+{
+  "name": "secretcloset",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
+  "author": "Tariq",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/jwt": "^7.2.2",
+    "@fastify/mysql": "^3.0.0",
+    "bcrypt": "^5.1.1",
+    "date-fns": "^2.30.0",
+    "dotenv": "^16.3.1",
+    "fastify": "^4.24.2",
+    "fastify-mysql": "^2.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.0.1"
+  }
+}
