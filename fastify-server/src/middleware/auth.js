@@ -11,7 +11,6 @@ const auth = async (request, reply) => {
 
     try {
         decoded = request.jwtVerify();
-        console.log('decoded: ', decoded);
     } catch (error) {
         return reply.code(401).send({ error: 'Unauthorized' });
     }

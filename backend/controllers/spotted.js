@@ -40,7 +40,6 @@ export const createSpotted = async (req, res) => {
 
 }
 
-
 export const getAllSpotted = async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
@@ -71,7 +70,6 @@ export const getAllSpotted = async (req, res) => {
         });
     }
 };
-
 
 export const updateSpotted = async (req, res) => {
     try {
@@ -114,7 +112,6 @@ export const updateSpotted = async (req, res) => {
     }
 };
 
-
 export const deleteSpotted = async (req, res) => {
     try {
         const id = req.query.id;
@@ -142,7 +139,6 @@ export const deleteSpotted = async (req, res) => {
     }
 };
 
-
 export const createSpottedCategory = async (req, res) => {
 
     try {
@@ -166,6 +162,7 @@ export const createSpottedCategory = async (req, res) => {
     }
 
 }
+
 export const updateSpottedCategory = async (req, res) => {
     try {
         const categoryId = req.query.id;
@@ -191,7 +188,6 @@ export const updateSpottedCategory = async (req, res) => {
         });
     }
 };
-
 
 export const deleteSpottedCategory = async (req, res) => {
 
@@ -221,8 +217,6 @@ export const deleteSpottedCategory = async (req, res) => {
     }
 
 }
-
-
 
 export const getAllSpottedCategories = async (req, res) => {
     try {

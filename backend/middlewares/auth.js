@@ -2,25 +2,25 @@ import { User } from "../models/User.js"
 import jwt from "jsonwebtoken"
 
 export const isAuthenticated = async (req, res, next) => {
-    console.log('req: ', req);
     try {
-        const { token } = req.cookies;
-        if (!token) {
+        const authorizationHeader = req.header('Authorization');
+
+        if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
             return res.status(401).json({
-                message: "Please login first"
-            })
+                message: 'Please include a valid Bearer token in the Authorization header',
+            });
         }
 
-        const decoded = await jwt.verify(token, process.env.SECRET)
+        const token = authorizationHeader.replace('Bearer ', '');
+
+        const decoded = jwt.verify(token, process.env.SECRET);
 
         req.user = await User.findById(decoded._id);
-        next()
+        next();
     } catch (error) {
-
         res.status(500).json({
             message: error.message,
-            success: false
-        })
-
+            success: false,
+        });
     }
-}
+};

@@ -20,6 +20,9 @@ if (process.env.NODE_ENV !== "production") {
     dotenv.config({ path: "backend/config/config.env" }); // Corrected the function name to dotenv.config
 }
 
+
+/* CONFIGURATION */
+dotenv.config();
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
@@ -28,6 +31,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 app.use(cookieParser());
+
+
+
+
 
 app.use("/api/v1/spotted", spotted);
 app.use("/api/v1/designer", designer);

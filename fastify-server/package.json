@@ -10,14 +10,28 @@
   "author": "Tariq",
   "license": "ISC",
   "dependencies": {
+    "@fastify/cors": "^8.4.0",
     "@fastify/jwt": "^7.2.2",
+    "@fastify/multipart": "^8.0.0",
     "@fastify/mysql": "^3.0.0",
+    "@fastify/swagger": "^7.0.0",
+    "@types/node": "^20.8.8",
     "bcrypt": "^5.1.1",
     "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",
-    "fastify": "^4.24.2",
+    "fastify": "^4.24.3",
+    "fastify-jwt": "^4.2.0",
+    "fastify-multer": "^2.0.3",
+    "fastify-multipart": "^5.4.0",
     "fastify-mysql": "^2.2.0",
+    "fastify-plugin": "^4.5.1",
+    "fastify-swagger": "^5.2.0",
+    "fastify-zod": "^1.4.0",
     "jsonwebtoken": "^9.0.2",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2",
+    "zod": "^3.22.4",
+    "zod-to-json-schema": "^3.21.4"
   }
 }
