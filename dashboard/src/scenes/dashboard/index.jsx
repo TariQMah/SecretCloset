@@ -18,7 +18,7 @@ import {
 import { DataGrid } from "@mui/x-data-grid";
 // import BreakdownChart from "components/BreakdownChart";
 // import OverviewChart from "components/OverviewChart";
-import { useGetDashboardQuery } from "state/api";
+// import { useGetDashboardQuery } from "state/api";
 import { useNavigate } from "react-router-dom";
 // import StatBox from "components/StatBox";
 
@@ -26,8 +26,9 @@ const Dashboard = () => {
     const theme = useTheme();
     const navigate = useNavigate()
     const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
-    const { data, isLoading } = useGetDashboardQuery();
-
+    // const { data, isLoading } = useGetDashboardQuery();
+    const data = []
+    const isLoading = true;
     const columns = [
         {
             field: "_id",

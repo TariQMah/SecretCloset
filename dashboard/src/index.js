@@ -8,11 +8,13 @@ import { Provider } from 'react-redux';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { api } from "state/api"
 import { authSlice } from "state/auth"
+import { commonSlice } from "state/commons"
 
 const store = configureStore({
   reducer: {
     global: globalReducer,
     auth: authSlice.reducer,
+    commons: commonSlice.reducer,
     [api.reducerPath]: api.reducer
   },
 

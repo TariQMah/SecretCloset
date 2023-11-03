@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Button, Paper, useTheme } from "@mui/material";
-import { useGetAllSpottedQuery } from "state/api";
+import { useGetAllDesignerQuery, useGetAllSpottedQuery } from "state/api";
 import Header from "components/Header";
 import { DataGrid } from "@mui/x-data-grid";
 import DataGridCustomToolbar from "components/DataGridCustomToolbar";
@@ -8,7 +8,6 @@ import { Add, } from "@mui/icons-material";
 import FlexBetween from "components/FlexBetween";
 import { useNavigate } from "react-router-dom";
 import { CustomSwitch, formattedDate } from "utils/utilities";
-import { green } from "@mui/material/colors";
 
 
 const Image = (props) => {
@@ -22,7 +21,7 @@ const Image = (props) => {
 
 
 
-const Spotted = () => {
+const Designer = () => {
     const theme = useTheme();
     const [pageSize, setPageSize] = useState(20);
     const [sort, setSort] = useState({});
@@ -32,16 +31,18 @@ const Spotted = () => {
     const navigate = useNavigate()
 
 
+
+    const { data, isLoading } = useGetAllDesignerQuery({
+        page,
+        pageSize,
+        sort: JSON.stringify(sort),
+        //search,
+    });
+
     const quickAction = (e, type) => {
         console.log('type: ', type);
         console.log('e: ', e);
     }
-    const { data, isLoading } = useGetAllSpottedQuery({
-        page,
-        pageSize,
-        sort: JSON.stringify(sort),
-        search,
-    });
 
     const columns = [
         {
@@ -51,30 +52,32 @@ const Spotted = () => {
 
         },
         {
-            field: "image",
-            headerName: "Poster",
+            field: "logo",
+            headerName: "Logo",
             flex: 0.5,
             renderCell: (params) => <Image url={`https://www.secretcloset.pk/uploads/${params.value}`} />,
         },
         {
-            field: "category",
-            headerName: "Category",
-            flex: 0.5,
+            field: "category_names",
+            headerName: "Categories",
+            flex: 1,
         },
         {
-            field: "title",
-            headerName: "Title",
+            field: "full_name",
+            headerName: "Designer",
             flex: 0.5,
         },
         {
             field: "event_name",
-            headerName: "Event Name",
+            headerName: "Designer Name",
             flex: 0.5,
         },
         {
-            field: "details",
+            field: "contents",
             headerName: "Details",
             flex: 1,
+            renderCell: (params) => <div dangerouslySetInnerHTML={{ __html: params.value }} />
+
         },
         {
             field: "date",
@@ -83,11 +86,12 @@ const Spotted = () => {
             renderCell: (params) => formattedDate(params.value)
 
         },
+
         {
             field: "stat",
             headerName: "Active",
             flex: 0.2,
-            renderCell: (params) => <CustomSwitch variant={green[600]} value={params.value} onChange={(e) => quickAction(e, "isActive")} defaultChecked size="small" />
+            renderCell: (params) => <CustomSwitch value={params.value} onChange={(e) => quickAction(e, "isActive")} defaultChecked size="small" />
 
         },
         {
@@ -113,7 +117,7 @@ const Spotted = () => {
         <Box m="1.5rem 2.5rem">
             <FlexBetween>
 
-                <Header title="Spotted" subtitle="List of Spotted" />
+                <Header title="Designer" subtitle="List of Designer" />
 
                 <Box>
                     <Button
@@ -166,9 +170,9 @@ const Spotted = () => {
                 <DataGrid
                     loading={isLoading || !data}
                     getRowId={(row) => row.sno}
-                    rows={(data && data.spotted) || []}
+                    rows={(data && data?.designer) || []}
                     columns={columns}
-                    rowCount={(data?.spotted && data.total) || 0}
+                    rowCount={(data?.designer && data.total) || 0}
                     rowsPerPageOptions={[20, 50, 100]}
                     pagination
                     page={page}
@@ -192,4 +196,4 @@ const Spotted = () => {
     );
 };
 
-export default Spotted;
+export default Designer;

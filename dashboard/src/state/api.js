@@ -1,5 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const headers = { 'Content-Type': 'application/json' };
+
+
 export const api = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_BASE_URL,
@@ -14,100 +17,84 @@ export const api = createApi({
     reducerPath: "adminApi",
     tagTypes: [
         "User",
+        "SpottedCategories",
         "Spotteds",
-        "Products",
-        "Customers",
-        "Transactions",
-        "Geography",
-        "Sales",
-        "Admins",
-        "Performance",
+        "Spotteds",
         "Dashboard",
     ],
     endpoints: (build) => ({
-        getUser: build.query({
-            query: (id) => `general/user/${id}`,
-            providesTags: ["User"],
+
+
+        getAllSpottedCategories: build.query({
+            query: () => ({
+                url: `api/v1/spotted/getCategories`,
+                method: "GET",
+                providesTags: ["SpottedCategories"],
+            }),
+            providesTags: ["SpottedCategories"],
         }),
+
         getAllSpotted: build.query({
             query: ({ page, pageSize, sort, search }) => ({
-                url: `api/v1/spotted/getAll`,
+                url: `api/v1/spotted`,
                 method: "GET",
                 params: {
-                    page: ++page, limit: pageSize, sort, search
+                    perPage: pageSize, page: ++page, sort, search
                 },
             }),
             providesTags: ["Spotteds"],
         }),
+
+        getAllDesigner: build.query({
+            query: ({ page, pageSize, sort, search }) => ({
+                url: `api/v1/designer`,
+                method: "GET",
+                params: {
+                    perPage: pageSize, page: ++page, sort, search
+                },
+            }),
+            providesTags: ["designers"],
+        }),
+
+
         postLogin: build.mutation({
-            query: ({ email, password }) => ({
+            query: ({ user, password }) => ({
                 url: `api/v1/auth/login`,
                 method: "POST",
-                body: { email, password }
+                body: { user, password }
             }),
             invalidatesTags: ["Login"],
-            headers: { 'Content-Type': 'application/json' },
+            headers,
             credentials: ""
         }),
-        getTransactions: build.query({
-            query: ({ page, pageSize, sort, search }) => ({
-                url: "client/transactions",
-                method: "GET",
-                params: { page, pageSize, sort, search },
+
+        postCreateSpotted: build.mutation({
+            query: ({ category, cover, details, eventName, isActive, isFeature, isHome, order, title }) => ({
+                url: `api/v1/spotted/create`,
+                method: "POST",
+                body: { category, image: cover[0], details, eventName, isActive, isFeature, isHome, order: parseInt(order), title }
             }),
-            providesTags: ["Transactions"],
+            invalidatesTags: ["CreateSpotted"],
+            headers,
         }),
 
 
-        getProducts: build.query({
-            query: () => "client/products",
-            providesTags: ["Products"],
-        }),
-        getCustomers: build.query({
-            query: () => "client/customers",
-            providesTags: ["Customers"],
-        }),
-        getTransactions: build.query({
-            query: ({ page, pageSize, sort, search }) => ({
-                url: "client/transactions",
-                method: "GET",
-                params: { page, pageSize, sort, search },
-            }),
-            providesTags: ["Transactions"],
-        }),
-        getGeography: build.query({
-            query: () => "client/geography",
-            providesTags: ["Geography"],
-        }),
-        getSales: build.query({
-            query: () => "sales/sales",
-            providesTags: ["Sales"],
-        }),
-        getAdmins: build.query({
-            query: () => "management/admins",
-            providesTags: ["Admins"],
-        }),
-        getUserPerformance: build.query({
-            query: (id) => `management/performance/${id}`,
-            providesTags: ["Performance"],
-        }),
-        getDashboard: build.query({
-            query: () => "general/dashboard",
-            providesTags: ["Dashboard"],
-        }),
+
+
+
     }),
 });
 
 export const {
     useGetUserQuery,
+    useGetAllSpottedCategoriesQuery,
     useGetAllSpottedQuery,
-    usePostLoginMutation,
-    useGetProductsQuery,
     useGetCustomersQuery,
-    useGetTransactionsQuery,
-    useGetGeographyQuery,
-    useGetSalesQuery,
-    useGetAdminsQuery,
-    useGetUserPerformanceQuery,
-    useGetDashboardQuery,
+    useGetAllDesignerQuery,
+
+
+
+    usePostLoginMutation,
+    usePostCreateSpottedMutation,
+
 } = api;

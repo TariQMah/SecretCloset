@@ -24,9 +24,9 @@ const Login = () => {
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
-        postLogin(data).unwrap().then((response) => {
+        postLogin(data).unwrap().then(async (response) => {
             if (response.token) {
-                localStorage.setItem("token", response.token);
+                await localStorage.setItem("token", response.token);
                 dispatch(login(response))
                 navigate("/dashboard");
             }
@@ -44,15 +44,12 @@ const Login = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <Box mt={3} width={400}>
                             <Controller
-                                name="email"
+                                name="user"
                                 control={control}
                                 defaultValue=""
                                 rules={{
-                                    required: "Email is required",
-                                    pattern: {
-                                        value: /^\S+@\S+$/i,
-                                        message: "Invalid email address",
-                                    },
+                                    required: "User is required",
+
                                 }}
                                 render={({ field }) => (
                                     <TextField
